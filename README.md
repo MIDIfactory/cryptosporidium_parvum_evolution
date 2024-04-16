@@ -88,7 +88,7 @@ p <- ggplot(data=d, aes(x=BIN_START, y=-1)) +
   scale_x_continuous(breaks = scales::pretty_breaks(n = 10), labels=scales::unit_format(unit="kb", scale=1e-3)) +
   labs(title="Number of SNPs within 10kb window size" , fill="")
 ```
-## Heatmap SNP distance
+## Heatmap SNP distances
 R script used to obtain Figure 2 
 ```{R}
 library(reshape2)
