@@ -8,13 +8,17 @@ R script for assessing the multiplicity of infection across the samples
 library(SeqArray)
 library(moimix)
 
+# Load VCF and covert to GDS
 seqVCF2GDS ("input_moimix.vcf" , "input_moimix.gds")
+# Import newly created GDS
 isolates <- seqOpen("input_moimix.gds")
+# Check name of the isolates
 seqSummary(isolates)
 sample.id <- seqGetData(isolates, "sample.id")
 coords <- getCoordinates(isolates)
 head(coords)
 
+# Compute B allele frequency matrix
 isolate_baf <- bafMatrix(isolates)
 
 # Obtain a plot for a single sample
@@ -31,7 +35,7 @@ for (i in sample.id){
 dev.off()
 
 
-# Calculates Fws values for each sample in VCF file
+# Compute Fws values for each sample in VCF file
 fws_all <- data.frame(getFws(isolates))
 write.csv(fws_all, "moimixout.tsv", row.names = TRUE, quote = FALSE)
 ```
@@ -52,8 +56,8 @@ library(plyr)
 options(scipen=999)
 
 # Load the input file
-d <- read.table("Input.snpden", stringsAsFactors=T, header=T) 
-### change Input.snpden with the name of the input file 
+d <- read.table("SNPs_densityPerKb", stringsAsFactors=T, header=T) 
+### change SNPs_densityPerKb with the name of the input file 
 
 # Replace with chromosome name (in wanted, can also be skipped)
 d$CHROM <- revalue(d$CHROM, c("CP044422.1"="1"))
@@ -98,7 +102,6 @@ library(ape)
 library(dendextend)
 library(gplots)
 library(autoimage)
-
 
 heatmap_data <- read.csv("matrix.tsv", sep='\t', check.names=FALSE, stringsAsFactors = FALSE)
 h_d <- as.matrix(heatmap_data[,-1])
