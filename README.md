@@ -38,7 +38,7 @@ write.csv(fws_all, "moimixout.tsv", row.names = TRUE, quote = FALSE)
 
 
 ## SNP density across the chromosomes
-Compute N. of SNPs each 1000 bases
+Compute SNP density per kilobase
 ```{bash}
 vcftools --vcf input.vcf --SNPdensity 1000 --out SNPs_densityPerKb
 ```
@@ -121,8 +121,6 @@ a <- heatmap.2(h_d, trace="none", col=hm.colors, breaks = breaks, na.color = "re
                key=TRUE, key.title = "", key.xlab = "", symkey=FALSE, symbreaks=FALSE, keysize = 10, key.par=list(mar=c(3,1,2,2)),#( "bottom.margin", "left.margin", "top.margin", "right.margin" )
                sepcolor = "white", sepwidth = c(0.005, 0.005), colsep = 1:ncol(h_d), rowsep=1:nrow(h_d), cexCol = 0.001, cexRow = 0.001, lhei=c(0.75,5), lwid=c(0.75,3.5))
 ```
-
-
 
 
 ## Recombinations
